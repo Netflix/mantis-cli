@@ -1,0 +1,65 @@
+{
+  "name": "mantis",
+  "version": "0.1.0",
+  "author": "",
+  "description": "Mantis CLI",
+  "bin": {
+    "mantis": "./bin/run"
+  },
+  "dependencies": {
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-commands": "^1.2.0",
+    "@oclif/plugin-help": "^2.1.0",
+    "@oclif/plugin-not-found": "^1.2.0",
+    "async-retry": "^1.2.3",
+    "aws-sdk": "^2.286.2",
+    "cli-ux": "^4.7.3",
+    "fs-extra": "^7.0.0",
+    "inquirer": "^6.1.0",
+    "is-empty": "^1.2.0",
+    "listr": "^0.14.1",
+    "node-notifier": "5.2.1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1",
+    "@oclif/test": "^1",
+    "chai": "^4.1.2",
+    "eslint": "4.19.1",
+    "eslint-config-oclif": "1.5.1",
+    "mocha": "^5.2.0",
+    "mock-fs": "^4.6.0",
+    "nock": "^9.6.0",
+    "nyc": "^12.0.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "main": "src/index.js",
+  "license": "Apache-2.0",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "mantis",
+    "plugins": [
+      "@oclif/plugin-commands",
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found"
+    ],
+    "macos": {
+      "identifier": "com.netflix.mantis.cli"
+    }
+  },
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
+    "posttest": "eslint .",
+    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
+    "test": "mocha --forbid-only \"test/**/*.test.js\"",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}

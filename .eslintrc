@@ -1,0 +1,17 @@
+{
+  "extends": "oclif",
+  "overrides": [
+    {
+      "files": "*.test.js",
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    },
+    {
+      "files": "*.js",
+      "rules": {
+        "no-console": "off"
+      }
+    },
+  ]
+}
