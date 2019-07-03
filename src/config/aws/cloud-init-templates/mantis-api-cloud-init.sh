@@ -15,15 +15,15 @@ sudo apt-get update
 sudo apt-get install -y zulu-8
 
 mkdir -p /apps/mantis
-git clone https://github.com/Netflix/mantis-api.git && cd mantis-api && ./gradlew assemble -Prelease.version=0.1.0 --info
-sudo mv /tmp/mantis-api/build/distributions/mantis-api-0.1.0.tar /apps/mantis
-tar -xf /apps/mantis/mantis-api-0.1.0.tar -C /apps/mantis
-rm /apps/mantis/mantis-api-0.1.0.tar
-mkdir -p /apps/mantis/mantis-api-0.1.0/logs
-mkdir -p /apps/mantis/mantis-api-0.1.0/conf
-sudo ln -s /apps/mantis/mantis-api-0.1.0 /apps/mantis/mantis-api
+wget -v https://github.com/Netflix/mantis-api/archive/v1.2.0.tar.gz -P /tmp/mantis-api && sudo tar xzvf /tmp/mantis-api/v1.2.0.tar.gz -C /tmp/mantis-api && cd /tmp/mantis-api/mantis-api-1.2.0 && ./gradlew assemble --no-daemon --info
+sudo mv /tmp/mantis-api/mantis-api-1.2.0/build/distributions/mantis-api-0.1.0-dev.0.uncommitted.tar /apps/mantis
+tar -xf /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted.tar -C /apps/mantis
+rm /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted.tar
+mkdir -p /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted/logs
+mkdir -p /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted/conf
+sudo ln -s /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted /apps/mantis/mantis-api
 sudo mkdir /logs
-sudo ln -s /apps/mantis/mantis-api-0.1.0/logs /logs/mantisapi
+sudo ln -s /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted/logs /logs/mantisapi
 
 cat > /apps/mantis/mantis-api/conf/server.properties <<FILE
 mantisapi.server.port=7101
