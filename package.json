@@ -1,7 +1,7 @@
 {
   "name": "mantis",
   "version": "0.1.0",
-  "author": "",
+  "author": "Jeff Chao",
   "description": "Mantis CLI",
   "bin": {
     "mantis": "./bin/run"
