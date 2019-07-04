@@ -27,18 +27,18 @@ apt-get install -y build-essential awscli libssl-dev unattended-upgrades
 sudo apt-get -y install mesos=1.0.1-2.0.94.ubuntu1604
 
 mkdir -p /apps/mantis
-git clone https://github.com/Netflix/mantis-control-plane.git && cd mantis-control-plane && ./gradlew assemble -Prelease.version=0.1.0 --info
-sudo mv /tmp/mantis-control-plane/build/distributions/mantis-control-plane-0.1.0.tar /apps/mantis
-tar -xf /apps/mantis/mantis-control-plane-0.1.0.tar -C /apps/mantis
-rm /apps/mantis/mantis-control-plane-0.1.0.tar
-mkdir -p /apps/mantis/mantis-control-plane-0.1.0/src/main/webapp
-mkdir -p /apps/mantis/mantis-control-plane-0.1.0/logs
-mkdir -p /apps/mantis/mantis-control-plane-0.1.0/conf
+wget -v https://github.com/Netflix/mantis-control-plane/archive/v1.2.6.tar.gz -P /tmp/mantis-control-plane && sudo tar xzvf /tmp/mantis-control-plane/v1.2.6.tar.gz -C /tmp/mantis-control-plane && cd /tmp/mantis-control-plane/mantis-control-plane-1.2.6 && ./gradlew assemble --no-daemon --info
+sudo mv /tmp/mantis-control-plane/mantis-control-plane-1.2.6/server/build/distributions/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar /apps/mantis
+tar -xf /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar -C /apps/mantis
+rm /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar
+mkdir -p /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted/src/main/webapp
+mkdir -p /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted/logs
+mkdir -p /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted/conf
 mkdir -p /tmp/MantisSpool/namedJobs
 mkdir -p /tmp/MantisArchive
-sudo ln -s /apps/mantis/mantis-control-plane-0.1.0 /apps/mantis/mantis-control-plane
+sudo ln -s /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted /apps/mantis/mantis-control-plane-server
 
-cat > /apps/mantis/mantis-control-plane/conf/master.properties <<FILE
+cat > /apps/mantis/mantis-control-plane-server/conf/master.properties <<FILE
 mantis.master.consoleport=8100
 mantis.master.apiport=8100
 mantis.master.apiportv2=8100
@@ -73,7 +73,7 @@ mesos.worker.timeoutSecondsToReportStart=10
 mantis.master.metrics.port=8082
 FILE
 
-sudo cat > /apps/mantis/mantis-control-plane/conf/environment <<FILE
+sudo cat > /apps/mantis/mantis-control-plane-server/conf/environment <<FILE
 JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dmantis.zookeeper.connectString=172.31.0.4:2181 -Dmesos.master.location=172.31.0.6:5050 -Dmantis.master.exit.on.losing.leader=false"
 LIBPROCESS_IP=172.31.0.7
 FILE
@@ -86,9 +86,9 @@ Description=Mantis Control Plane
 Type=simple
 Restart=always
 LimitNOFILE=65535
-EnvironmentFile=/apps/mantis/mantis-control-plane/conf/environment
-WorkingDirectory=/apps/mantis/mantis-control-plane
-ExecStart=/bin/bash -ce "exec /apps/mantis/mantis-control-plane/bin/mantis-control-plane -p conf/master.properties 2>> /apps/mantis/mantis-control-plane/logs/stderr 1>> /apps/mantis/mantis-control-plane/logs/stdout"
+EnvironmentFile=/apps/mantis/mantis-control-plane-server/conf/environment
+WorkingDirectory=/apps/mantis/mantis-control-plane-server
+ExecStart=/bin/bash -ce "exec /apps/mantis/mantis-control-plane-server/bin/mantis-control-plane-server -p conf/master.properties 2>> /apps/mantis/mantis-control-plane-server/logs/stderr 1>> /apps/mantis/mantis-control-plane-server/logs/stdout"
 
 [Install]
 WantedBy=multi-user.target
