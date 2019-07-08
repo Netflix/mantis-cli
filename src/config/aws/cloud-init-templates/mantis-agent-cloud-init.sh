@@ -84,9 +84,9 @@ JOB_PROVIDER_CLASS=""
 sudo wget -v \$JOB_URL -P "/tmp/mantis-jobs/\${JOB_NAME}/lib"
 
 # Link worker.properties
-ln -s /mnt/local/mantisWorkerInstall/jobs/* "/tmp/mantis-jobs/\${JOB_NAME}/lib"
+cp -s /mnt/local/mantisWorkerInstall/jobs/* "/tmp/mantis-jobs/\${JOB_NAME}/lib"
 # Link mantis-worker.jar
-ln -s /mnt/local/mantisWorkerInstall/libs/* "/tmp/mantis-jobs/\${JOB_NAME}/lib"
+cp -s /mnt/local/mantisWorkerInstall/libs/* "/tmp/mantis-jobs/\${JOB_NAME}/lib"
 cd \$JOB_JARS_DIR
 
 zipexists=\`ls -l *.zip 2>/dev/null | wc -l\`
@@ -132,8 +132,8 @@ FILE
 sudo chmod +x /apps/mesos/bin/mantis-agent
 
 # Add sample mantis job jars
-git clone https://github.com/Netflix/mantis.git && cd mantis && ./gradlew mantis-server:mantis-server-worker:fatJar -Prelease.version=0.1.0 --info
-cp /tmp/mantis/mantis-server/mantis-server-worker/build/libs/mantis-server-worker-0.1.0.jar /mnt/local/mantisWorkerInstall/libs/mantis-server-worker.jar
+wget -v https://github.com/Netflix/mantis/archive/v1.2.3.tar.gz -P /tmp/mantis && sudo tar xzvf /tmp/mantis/v1.2.3.tar.gz -C /tmp/mantis && cd /tmp/mantis/mantis-1.2.3 && ./gradlew mantis-server:mantis-server-worker:fatJar --no-daemon --info
+sudo mv /tmp/mantis/mantis-1.2.3/mantis-server/mantis-server-worker/build/libs/mantis-server-worker-0.1.0-dev.0.uncommitted.jar /mnt/local/mantisWorkerInstall/libs/mantis-server-worker.jar
 
 # Add mantis-agent run script
 sudo cat > /lib/systemd/system/mantis-agent.service <<FILE
