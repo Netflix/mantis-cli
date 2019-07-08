@@ -53,6 +53,8 @@ class BootstrapCommand extends Command {
       return
     }
 
+    defaults.regionalKeyPair = defaults.keyPair + '-' + defaults.region
+
     let context = {
       defaults: defaults,
       ec2: ec2,
