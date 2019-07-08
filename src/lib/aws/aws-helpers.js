@@ -198,6 +198,8 @@ function getAmiId(region) {
   } else if (region === 'us-west-2') {
     return 'ami-ba602bc2'
   }
+
+  throw new Error('could not match region to AMI ID')
 }
 
 /**
@@ -212,6 +214,8 @@ function getRegionSubnet(region) {
   } else if (region === 'us-west-2') {
     return 'c'
   }
+
+  throw new Error('could not match region to subnet')
 }
 
 module.exports.createSecurityGroups = createSecurityGroups
