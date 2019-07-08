@@ -57,13 +57,13 @@ const bootstrap = async (ctx, task) => {
     IamInstanceProfile: {
       Name: ctx.iamInstanceProfile,
     },
-    ImageId: 'ami-5e8bb23b',
+    ImageId: awsHelpers.getAmiId(ctx.defaults.region),
     InstanceType: 't2.micro',
-    KeyName: ctx.defaults.keyPair,
+    KeyName: ctx.defaults.regionalKeyPair,
     MaxCount: 1,
     MinCount: 1,
     Placement: {
-      AvailabilityZone: 'us-east-2a',
+      AvailabilityZone: ctx.defaults.region + awsHelpers.getRegionSubnet(ctx.defaults.region),
     },
     PrivateIpAddress: privateIp,
     SecurityGroupIds: [

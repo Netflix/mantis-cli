@@ -3,14 +3,14 @@ const os = require('os')
 
 const createKeyPair = (ctx, task) => {
   const params = {
-    KeyName: ctx.defaults.keyPair,
+    KeyName: ctx.defaults.regionalKeyPair,
   }
 
-  const file = os.homedir().concat('/', `.aws/${ctx.defaults.keyPair}.pem`)
+  const file = os.homedir().concat('/', `.aws/${ctx.defaults.regionalKeyPair}.pem`)
   let response = null
 
   if (fs.pathExistsSync(file)) {
-    task.skip(`Key-pair file already exists (${ctx.defaults.keyPair})`)
+    task.skip(`Key-pair file already exists (${ctx.defaults.regionalKeyPair})`)
   } else {
     response = ctx.ec2.createKeyPair(params).promise().then(data => {
       fs.ensureFileSync(file)
@@ -18,7 +18,7 @@ const createKeyPair = (ctx, task) => {
       fs.chmodSync(file, '400')
     }).catch(err => {
       if (err.code === 'InvalidKeyPair.Duplicate') {
-        task.skip(`Key-pair already exists on AWS (${ctx.defaults.keyPair})`)
+        task.skip(`Key-pair already exists on AWS (${ctx.defaults.regionalKeyPair})`)
       } else {
         throw err
       }

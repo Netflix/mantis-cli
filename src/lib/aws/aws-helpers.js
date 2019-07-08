@@ -187,6 +187,37 @@ function credentialsExist() {
   return fs.existsSync(credentialsFile)
 }
 
+/**
+ * Returns an EC2 AMI ID for the region.
+ */
+function getAmiId(region) {
+  if (region === 'us-east-1') {
+    return 'ami-759bc50a'
+  } else if (region === 'us-east-2') {
+    return 'ami-5e8bb23b'
+  } else if (region === 'us-west-2') {
+    return 'ami-ba602bc2'
+  }
+
+  throw new Error('could not match region to AMI ID')
+}
+
+/**
+ * Returns the subnet matching range 172.31.0.0/20 with 4091 internal IPs.
+ * Subnet naming semantics are not necessarily the same across regions.
+ */
+function getRegionSubnet(region) {
+  if (region === 'us-east-1') {
+    return 'd'
+  } else if (region === 'us-east-2') {
+    return 'a'
+  } else if (region === 'us-west-2') {
+    return 'c'
+  }
+
+  throw new Error('could not match region to subnet')
+}
+
 module.exports.createSecurityGroups = createSecurityGroups
 module.exports.authorizeSecurityGroupIngress = authorizeSecurityGroupIngress
 module.exports.createIamRole = createIamRole
@@ -197,3 +228,5 @@ module.exports.terminateInstances = terminateInstances
 module.exports.deleteSecurityGroup = deleteSecurityGroup
 module.exports.credentialsFile = credentialsFile
 module.exports.credentialsExist = credentialsExist
+module.exports.getAmiId = getAmiId
+module.exports.getRegionSubnet = getRegionSubnet
