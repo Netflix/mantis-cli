@@ -222,8 +222,9 @@ AWS and Mantis dependencies in AWS. Specifically, it will create:
   3. Security groups
   4. Single Zookeeper EC2 instance backed by EBS volume
   5. Single Mesos Master EC2 instance backed by EBS volume
-  6. Single Mesos Slave EC2 instance backed by EBS volume
+  6. Single Mesos Agent EC2 instance backed by EBS volume
   7. Single Mantis Control Plane EC2 instance backed by EBS volume
+  8. Single Mantis API EC2 instance backed by EBS volume
 
 This command will also set up connection strings and other properties
 for Mantis.
