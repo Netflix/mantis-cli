@@ -27,8 +27,8 @@ apt-get install -y build-essential awscli libssl-dev unattended-upgrades
 sudo apt-get -y install mesos=1.0.1-2.0.94.ubuntu1604
 
 mkdir -p /apps/mantis
-wget -v https://github.com/Netflix/mantis-control-plane/archive/v1.2.6.tar.gz -P /tmp/mantis-control-plane && sudo tar xzvf /tmp/mantis-control-plane/v1.2.6.tar.gz -C /tmp/mantis-control-plane && cd /tmp/mantis-control-plane/mantis-control-plane-1.2.6 && ./gradlew assemble --no-daemon --info
-sudo mv /tmp/mantis-control-plane/mantis-control-plane-1.2.6/server/build/distributions/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar /apps/mantis
+wget -v https://github.com/Netflix/mantis-control-plane/archive/v1.2.9.tar.gz -P /tmp/mantis-control-plane && sudo tar xzvf /tmp/mantis-control-plane/v1.2.9.tar.gz -C /tmp/mantis-control-plane && cd /tmp/mantis-control-plane/mantis-control-plane-1.2.9 && ./gradlew assemble --no-daemon --info
+sudo mv /tmp/mantis-control-plane/mantis-control-plane-1.2.9/server/build/distributions/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar /apps/mantis
 tar -xf /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar -C /apps/mantis
 rm /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar
 mkdir -p /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted/src/main/webapp
