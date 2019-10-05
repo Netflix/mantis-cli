@@ -22,7 +22,7 @@ async function parseRegion(defaults, flags) {
 async function parseConfirm(configs, flags) {
   const confirmation = flags.confirm || await inquirer.prompt({
     name: 'confirm',
-    message: `Using configs: ${JSON.stringify(configs)}\nProceed? (Y/n)`,
+    message: 'Proceed with Mantis cluster creation? (Y/n)',
     default: 'n',
   }).then(response => response.confirm === 'Y')
 
