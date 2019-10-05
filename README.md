@@ -8,7 +8,7 @@ CLI for interacting with Mantis clusters.
 
 ## Dependencies
 
-1. node 0.10.8
+1. node 10
 2. yarn
 3. oclif
 4. oclif-dev
