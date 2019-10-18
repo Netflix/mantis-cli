@@ -17,8 +17,8 @@ sudo apt-get install -y zulu-8
 sudo apt-get install -y unzip
 
 mkdir -p /apps/mantis
-wget -v https://github.com/Netflix/mantis-api/archive/v1.2.0.tar.gz -P /tmp/mantis-api && sudo tar xzvf /tmp/mantis-api/v1.2.0.tar.gz -C /tmp/mantis-api && cd /tmp/mantis-api/mantis-api-1.2.0 && ./gradlew assemble --no-daemon --info
-sudo mv /tmp/mantis-api/mantis-api-1.2.0/build/distributions/mantis-api-0.1.0-dev.0.uncommitted.tar /apps/mantis
+wget -v https://github.com/Netflix/mantis-api/archive/v1.2.6.tar.gz -P /tmp/mantis-api && sudo tar xzvf /tmp/mantis-api/v1.2.6.tar.gz -C /tmp/mantis-api && cd /tmp/mantis-api/mantis-api-1.2.6 && ./gradlew assemble --no-daemon --info
+sudo mv /tmp/mantis-api/mantis-api-1.2.6/build/distributions/mantis-api-0.1.0-dev.0.uncommitted.tar /apps/mantis
 tar -xf /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted.tar -C /apps/mantis
 rm /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted.tar
 mkdir -p /apps/mantis/mantis-api-0.1.0-dev.0.uncommitted/logs

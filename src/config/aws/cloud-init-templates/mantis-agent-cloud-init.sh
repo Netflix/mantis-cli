@@ -132,8 +132,8 @@ FILE
 sudo chmod +x /apps/mesos/bin/mantis-agent
 
 # Add mantis runtime jars
-wget -v https://github.com/Netflix/mantis/archive/v1.2.13.tar.gz -P /tmp/mantis && sudo tar xzvf /tmp/mantis/v1.2.13.tar.gz -C /tmp/mantis && cd /tmp/mantis/mantis-1.2.13 && ./gradlew mantis-server:mantis-server-worker:fatJar --no-daemon --info
-sudo mv /tmp/mantis/mantis-1.2.13/mantis-server/mantis-server-worker/build/libs/mantis-server-worker-0.1.0-dev.0.uncommitted.jar /mnt/local/mantisWorkerInstall/libs/mantis-server-worker.jar
+wget -v https://github.com/Netflix/mantis/archive/v1.2.17.tar.gz -P /tmp/mantis && sudo tar xzvf /tmp/mantis/v1.2.17.tar.gz -C /tmp/mantis && cd /tmp/mantis/mantis-1.2.17 && ./gradlew mantis-server:mantis-server-worker:fatJar --no-daemon --info
+sudo mv /tmp/mantis/mantis-1.2.17/mantis-server/mantis-server-worker/build/libs/mantis-server-worker-0.1.0-dev.0.uncommitted.jar /mnt/local/mantisWorkerInstall/libs/mantis-server-worker.jar
 
 # Add mantis-agent run script
 sudo cat > /lib/systemd/system/mantis-agent.service <<FILE
