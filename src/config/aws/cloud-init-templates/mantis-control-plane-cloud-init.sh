@@ -8,7 +8,7 @@ CODENAME=$(lsb_release -cs)
 # Set up Java 8
 sudo apt-get update
 sudo apt-get install -y --no-install-recommends software-properties-common
-sudo apt-get install -y python-software-properties debconf-utils
+sudo apt-get install -y python3-software-properties debconf-utils
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
 sudo apt-add-repository "deb http://repos.azulsystems.com/${DISTRO} stable main"
 sudo apt-get update
@@ -24,11 +24,11 @@ echo "deb http://repos.mesosphere.com/${DISTRO} ${CODENAME} main" |
 
 # Install Mesos
 apt-get install -y build-essential awscli libssl-dev unattended-upgrades
-sudo apt-get -y install mesos=1.0.1-2.0.94.ubuntu1604
+sudo apt-get -y install mesos=1.1.3-2.0.1
 
 mkdir -p /apps/mantis
-wget -v https://github.com/Netflix/mantis-control-plane/archive/v1.2.17.tar.gz -P /tmp/mantis-control-plane && sudo tar xzvf /tmp/mantis-control-plane/v1.2.17.tar.gz -C /tmp/mantis-control-plane && cd /tmp/mantis-control-plane/mantis-control-plane-1.2.17 && ./gradlew assemble --no-daemon --info
-sudo mv /tmp/mantis-control-plane/mantis-control-plane-1.2.17/server/build/distributions/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar /apps/mantis
+wget -v https://github.com/Netflix/mantis-control-plane/archive/v1.2.19.tar.gz -P /tmp/mantis-control-plane && sudo tar xzvf /tmp/mantis-control-plane/v1.2.19.tar.gz -C /tmp/mantis-control-plane && cd /tmp/mantis-control-plane/mantis-control-plane-1.2.19 && ./gradlew assemble --no-daemon --info
+sudo mv /tmp/mantis-control-plane/mantis-control-plane-1.2.19/server/build/distributions/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar /apps/mantis
 tar -xf /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar -C /apps/mantis
 rm /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted.tar
 mkdir -p /apps/mantis/mantis-control-plane-server-0.1.0-dev.0.uncommitted/src/main/webapp
