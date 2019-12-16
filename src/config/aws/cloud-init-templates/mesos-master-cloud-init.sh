@@ -12,7 +12,7 @@ CODENAME=$(lsb_release -cs)
 # Set up Java 8
 sudo apt-get update
 sudo apt-get install -y --no-install-recommends software-properties-common
-sudo apt-get install -y python-software-properties debconf-utils
+sudo apt-get install -y python3-software-properties debconf-utils
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
 sudo apt-add-repository "deb http://repos.azulsystems.com/${DISTRO} stable main"
 sudo apt-get update
@@ -27,7 +27,7 @@ echo "deb http://repos.mesosphere.com/${DISTRO} ${CODENAME} main" |
 sudo apt-get -y update
 
 # Install Mesos
-sudo apt-get -y install mesos=1.0.1-2.0.94.ubuntu1604
+sudo apt-get -y install mesos=1.1.3-2.0.1
 
 # Add environment file
 sudo mkdir -p /apps/mesos/conf
